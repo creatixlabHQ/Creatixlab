@@ -1,0 +1,303 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CreatixLab — Web & UI Studio</title>
+  <meta name="description" content="CreatixLab — Creative websites, fast performance, awesome UX. Built with HTML/CSS/JS." />  <!-- Simple favicon (SVG data URL) -->  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23246bd9'/%3E%3Ctext x='50' y='58' font-size='46' text-anchor='middle' fill='white' font-family='Arial, Helvetica, sans-serif'%3EC%3C/text%3E%3C/svg%3E" />  <style>
+    /* ====== Reset / base ====== */
+    :root{
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa7bf;
+      --accent: #46a6ff;
+      --accent-2: #7b61ff;
+      --glass: rgba(255,255,255,0.03);
+      --radius: 14px;
+      --fw-regular: 400;
+      --fw-bold: 700;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(70,106,255,0.06), transparent),
+                  radial-gradient(1000px 500px at 90% 90%, rgba(123,97,255,0.04), transparent),
+                  var(--bg);
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* ====== Layout ====== */
+    .container{max-width:1100px;margin:0 auto;padding:28px}
+
+    /* ====== Header ====== */
+    header{position:sticky;top:14px;z-index:40}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:10px;border-radius:12px;backdrop-filter: blur(6px);}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:46px;height:46px;display:grid;place-items:center;background:linear-gradient(135deg,var(--accent),var(--accent-2));border-radius:10px;box-shadow:0 6px 18px rgba(120,100,255,0.08)}
+    .logo strong{font-family:Inter, sans-serif;color:white}
+    .title{font-weight:700}
+    .navlinks{display:flex;gap:14px;align-items:center}
+    .navlinks a{padding:8px 12px;border-radius:8px;color:var(--muted);font-weight:600}
+    .navlinks a:hover{background:var(--glass);color:var(--accent)}
+    .btn{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:9px 14px;border-radius:10px;color:white;font-weight:700}
+
+    /* Mobile menu */
+    .hamburger{display:none;background:transparent;border:0;color:var(--muted);font-size:20px}
+
+    /* ====== Hero ====== */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center;padding:42px 0}
+    .hero h1{font-size:36px;margin:0 0 8px;letter-spacing:-0.6px}
+    .hero p{color:var(--muted);margin:0 0 18px}
+    .cta-row{display:flex;gap:12px;align-items:center}
+    .cards{display:flex;gap:12px;margin-top:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;min-width:110px;text-align:center}
+    .card h4{margin:6px 0 0}
+
+    /* Mockup */
+    .mockup{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:16px;padding:18px;box-shadow: 0 10px 30px rgba(8,12,20,0.6)}
+    .mockup iframe{width:100%;height:300px;border-radius:8px;border:0}
+
+    /* ====== Features ====== */
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:36px 0}
+    .feature{background:var(--card);padding:18px;border-radius:12px}
+    .feature h3{margin:0 0 8px}
+    .feature p{margin:0;color:var(--muted)}
+
+    /* ====== Portfolio ====== */
+    .portfolio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+    .work{background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);padding:14px;border-radius:10px}
+
+    /* ====== Contact ====== */
+    .contact{display:grid;grid-template-columns:1fr 360px;gap:18px;margin:28px 0;padding:20px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border-radius:12px}
+    .input{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    .submit{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;border:0}
+
+    footer{color:var(--muted);padding:28px 0;text-align:center}
+
+    /* ====== Responsive ====== */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .features{grid-template-columns:repeat(2,1fr)}
+      .portfolio{grid-template-columns:repeat(2,1fr)}
+      .contact{grid-template-columns:1fr}
+      .navlinks{display:none}
+      .hamburger{display:inline-block}
+    }
+    @media (max-width:560px){
+      .features{grid-template-columns:1fr}
+      .portfolio{grid-template-columns:1fr}
+    }
+
+    /* small niceties */
+    .muted{color:var(--muted)}
+    .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);font-weight:700}
+
+    /* micro animations */
+    .fade-up{transform:translateY(8px);opacity:0;transition:all 520ms cubic-bezier(.2,.9,.2,1)}
+    .fade-up.show{transform:none;opacity:1}
+
+  </style></head>
+<body>
+  <div class="container"><header>
+  <nav class="nav">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"><strong>C</strong></div>
+      <div>
+        <div class="title">CreatixLab</div>
+        <div class="muted" style="font-size:12px">Design • Web • Performance</div>
+      </div>
+    </div>
+
+    <div class="navlinks" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#contact">Contact</a>
+      <a class="btn" href="#contact">Get Started</a>
+    </div>
+
+    <button class="hamburger" id="hamb">☰</button>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" aria-label="Hero">
+    <div>
+      <div class="chip">Custom Websites • Fast Delivery</div>
+      <h1 class="fade-up" style="transition-delay:80ms">Beautiful websites that convert — crafted by CreatixLab</h1>
+      <p class="fade-up" style="transition-delay:160ms">We design and build fast, accessible, responsive websites with clean code and delightful UX. From landing pages to e‑commerce, we deliver results.</p>
+
+      <div class="cta-row fade-up" style="transition-delay:240ms">
+        <a class="btn" href="#contact">Hire Us</a>
+        <a class="muted" href="#work" style="padding:10px 12px;border-radius:10px;background:transparent">See Portfolio</a>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="muted">Delivery</div>
+          <h4>2–7 days</h4>
+        </div>
+        <div class="card">
+          <div class="muted">Free revisions</div>
+          <h4>3 rounds</h4>
+        </div>
+        <div class="card">
+          <div class="muted">Performance</div>
+          <h4>90+ Lighthouse</h4>
+        </div>
+      </div>
+    </div>
+
+    <aside class="mockup fade-up" style="transition-delay:320ms">
+      <!-- simple code mockup preview -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div style="font-weight:700">CreatixLab</div>
+        <div style="font-size:12px;color:var(--muted)">Live preview</div>
+      </div>
+      <iframe srcdoc='<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:12px;background:#fff;color:#111}h1{font-size:18px;margin:0}p{font-size:13px;color:#444}</style></head><body><h1>CreatixLab</h1><p>Sample landing — fast & clean.</p></body></html>' title="preview"></iframe>
+    </aside>
+  </section>
+
+  <section id="about">
+    <h2>About CreatixLab</h2>
+    <p class="muted">We are a small studio focused on building high-performance websites that look great and load fast. We care about accessibility, SEO and clean maintainable code.</p>
+  </section>
+
+  <section id="services" class="features">
+    <div class="feature">
+      <h3>Custom Design</h3>
+      <p>Create unique brand-driven visuals and UI systems that feel modern and human.</p>
+    </div>
+    <div class="feature">
+      <h3>Development</h3>
+      <p>Semantic HTML, modern CSS, and vanilla JS — or frameworks if you prefer.</p>
+    </div>
+    <div class="feature">
+      <h3>Optimization</h3>
+      <p>Performance audits, image optimization, critical CSS and accessibility fixes.</p>
+    </div>
+  </section>
+
+  <section id="work">
+    <h2>Selected Work</h2>
+    <div class="portfolio">
+      <div class="work">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect width='100%25' height='100%25' fill='%23224a6b'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='24' font-family='Arial' text-anchor='middle' dominant-baseline='middle'%3ELanding%20—%20Ecom%3C/text%3E%3C/svg%3E" alt="work 1">
+        <h4 style="margin:8px 0 4px">E‑commerce Landing</h4>
+        <div class="muted">Fast checkout • A/B tested hero</div>
+      </div>
+      <div class="work">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect width='100%25' height='100%25' fill='%236761a8'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='24' font-family='Arial' text-anchor='middle' dominant-baseline='middle'%3EPortfolio%20Site%3C/text%3E%3C/svg%3E" alt="work 2">
+        <h4 style="margin:8px 0 4px">Portfolio Site</h4>
+        <div class="muted">Minimal • Pixel-perfect layout</div>
+      </div>
+      <div class="work">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400'%3E%3Crect width='100%25' height='100%25' fill='%2387b5a9'/%3E%3Ctext x='50%25' y='50%25' fill='white' font-size='24' font-family='Arial' text-anchor='middle' dominant-baseline='middle'%3EB2B%20Landing%3C/text%3E%3C/svg%3E" alt="work 3">
+        <h4 style="margin:8px 0 4px">B2B Landing</h4>
+        <div class="muted">Lead gen optimized</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div>
+      <h2>Let's build something</h2>
+      <p class="muted">Tell us about your project. We'll reply within 24 hours.</p>
+
+      <form id="contactForm" onsubmit="return false;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+          <input class="input" id="name" placeholder="Your name" required>
+          <input class="input" id="email" type="email" placeholder="Email" required>
+        </div>
+        <textarea class="input" id="message" rows="6" placeholder="Short project brief" style="margin-top:10px" required></textarea>
+
+        <div style="margin-top:12px">
+          <button class="submit" id="sendBtn">Send message</button>
+          <span id="formStatus" style="margin-left:12px;color:var(--muted)"></span>
+        </div>
+      </form>
+    </div>
+
+    <aside style="padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);">
+      <h4 style="margin:0 0 8px">Contact</h4>
+      <div class="muted">hello@creatixlab.example</div>
+      <div class="muted" style="margin-top:8px">Based in India • Remote work worldwide</div>
+
+      <div style="margin-top:12px">
+        <strong>Services</strong>
+        <ul class="muted" style="margin:8px 0 0;padding-left:18px">
+          <li>Landing pages</li>
+          <li>Web Apps</li>
+          <li>Maintenance & SEO</li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+</main>
+
+<footer>
+  © <span id="year"></span> CreatixLab — Built with ❤️
+</footer>
+
+  </div>  <script>
+    // small UI behaviors: mobile nav, smooth scroll, fake form handling, reveal on scroll
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const hamb = document.getElementById('hamb');
+    const nav = document.getElementById('navlinks');
+    hamb.addEventListener('click', ()=>{
+      if(nav.style.display === 'flex') nav.style.display = '';
+      else nav.style.display = 'flex';
+    });
+
+    // smooth scroll for in-page anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(id.length>1){
+          e.preventDefault();
+          const el = document.querySelector(id);
+          if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      })
+    });
+
+    // small reveal on scroll
+    const observers = document.querySelectorAll('.fade-up');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{
+        if(en.isIntersecting) en.target.classList.add('show');
+      });
+    },{threshold:0.12});
+    observers.forEach(o => io.observe(o));
+
+    // fake form submit: validates and shows message (replace with real endpoint later)
+    const form = document.getElementById('contactForm');
+    const send = document.getElementById('sendBtn');
+    const status = document.getElementById('formStatus');
+    send.addEventListener('click', ()=>{
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if(!name || !email || !message){ status.textContent = 'Please fill all fields.'; return; }
+      send.disabled = true; send.textContent = 'Sending...';
+      // simulate network
+      setTimeout(()=>{
+        send.disabled = false; send.textContent = 'Send message';
+        status.textContent = 'Message sent! We will reply soon.';
+        form.reset();
+      },1200);
+    });
+
+  </script></body>
+      </html>
